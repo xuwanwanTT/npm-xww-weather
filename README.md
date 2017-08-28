@@ -4,7 +4,7 @@
 
 # 安装
 
-```npm install -g jirengu-xww-weather```
+```npm install -g xww-weather```
 
 # 安装依赖
 

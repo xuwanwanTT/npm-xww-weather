@@ -1,7 +1,9 @@
 {
   "name": "xww-weather",
-  "version": "1.0.4",
+  "version": "1.0.8",
   "description": "my first npm about weather",
+  "repository": "https://github.com/xuwanwanTT/npm-xww-weather",
+  "keywords": ["weather"],
   "main": "index.js",
   "bin": {
     "weather": "./index.js"
