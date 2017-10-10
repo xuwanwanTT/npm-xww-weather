@@ -14,7 +14,6 @@
   "author": "xuwanwanTT",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.2",
-    "node-pinyin": "^0.2.3"
+    "axios": "^0.16.2"
   }
 }
