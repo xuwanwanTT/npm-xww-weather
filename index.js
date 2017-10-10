@@ -6,47 +6,32 @@ var data = {}
 var city = {}
 var cityPy = ''
 if(process.argv[2]){
-  var d = pinyin(process.argv[2],{"style": 'normal'})
-  for(var i = 0; i < d.length; i++){
-    cityPy += d[i]
-  }
   data.params = {
-    location: cityPy
+    city: process.argv[2]
   }
-  axios.get('https://weixin.jirengu.com/weather/cityid',data)
+  axios.get('https://jirenguapi.applinzi.com/weather.php',data)
   .then(function(response){
-    city.params = {
-      cityid: response.data.results[0].id
-    }
-    axios.get('https://weixin.jirengu.com/weather/now',city)
-    .then(function(response){
-      var wt = response.data.weather[0]
-      console.log("城市：" + wt.city_name)
-      console.log("天气：" + wt.now.text)
-      console.log("温度：" + wt.future[0].high + "℃ ~" + wt.future[0].low + "℃" )
-      console.log("风向：" + wt.now.wind_direction + "风")
-      console.log("风力：" + parseInt(wt.now.wind_scale) + "级")
-      console.log("当前温度：" + wt.now.temperature + "℃")
-      console.log("pm25：" + wt.now.air_quality.city.pm25)
+    var wt = response.data.results[0]
+    console.log("城市：" + wt.currentCity)
+    console.log("天气：" + wt.weather_data[0].weather)
+    console.log("温度：" + wt.weather_data[0].temperature )
+    console.log("风向：" + wt.weather_data[0].wind)
+    console.log(wt.weather_data[0].date.match(/\((.+)\)$/)[1])
+    console.log("pm25：" + wt.pm25)
     })
-    .catch(function(error){
-      console.log(error)
-    })
-  })
   .catch(function(error){
     console.log(error)
   })
 } else {
-    axios.get('https://weixin.jirengu.com/weather')
+    axios.get('https://jirenguapi.applinzi.com/weather.php')
     .then(function(response){
-      var wt = response.data.weather[0]
-      console.log("城市：" + wt.city_name)
-      console.log("天气：" + wt.now.text)
-      console.log("温度：" + wt.future[0].high + "℃ ~" + wt.future[0].low + "℃" )
-      console.log("风向：" + wt.now.wind_direction + "风")
-      console.log("风力：" + parseInt(wt.now.wind_scale) + "级")
-      console.log("当前温度：" + wt.now.temperature + "℃")
-      console.log("pm25：" + wt.now.air_quality.city.pm25)
+      var wt = response.data.results[0]
+      console.log("城市：" + wt.currentCity)
+      console.log("天气：" + wt.weather_data[0].weather)
+      console.log("温度：" + wt.weather_data[0].temperature )
+      console.log("风向：" + wt.weather_data[0].wind)
+      console.log(wt.weather_data[0].date.match(/\((.+)\)$/)[1])
+      console.log("pm25：" + wt.pm25)
     })
     .catch(function(error){
       console.log(error)
